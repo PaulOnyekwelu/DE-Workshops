@@ -1,0 +1,18 @@
+uv run pgcli -h localhost -p 5432 -u root -d ny_taxi
+
+docker run -it --rm \
+ -e POSTGRES_USER='root' \
+ -e POSTGRES_PASSWORD='root' \
+ -e POSTGRES_DB='ny_taxi' \
+ -v ny_taxi_pg_data:/var/lib/postgresql \
+ -p 5432:5432 \
+ --network psg_net \
+ --name pgdb \
+ postgres:18
+
+
+docker run -it --network psg_net taxi_ingest --pg-host=pgdb
+
+
+jupyter nbconvert --to=script notebook.ipynb
+mv notebook.py ingest_data.py
