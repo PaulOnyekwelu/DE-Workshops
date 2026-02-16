@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: ny_taxi_raw_data
+    description: Raw NY taxi trip records
+    database: taxi_rides_ny
+    schema: prod
+    tables:
+      - name: green_tripdata
+      - name: yellow_tripdata
